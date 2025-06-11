@@ -9,7 +9,7 @@
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><p>Aqui está o manual atualizado com um exemplo detalhado de primeiro commit e uma seção sobre Git LFS:</p>
+  <div class="stackedit__html"><p>Aqui está o manual completo com a nova seção <strong>“Reiniciando um Repositório”</strong> adicionada após os exemplos de erro:</p>
 <hr>
 <h3 id="manual-do-git-hub"><strong>MANUAL DO GIT HUB</strong></h3>
 <p><em>(Git e GitHub - Erros, Correções, Primeiros Passos, Boas Práticas e LFS)</em></p>
@@ -35,29 +35,54 @@
 <span class="token comment"># 3. Criar arquivo README</span>
 <span class="token keyword">echo</span> <span class="token string">"# Meu Projeto"</span> <span class="token operator">&gt;&gt;</span> README.md
 
-<span class="token comment"># 4. Verificar status</span>
-<span class="token function">git</span> status
-
-<span class="token comment"># 5. Adicionar ao staging</span>
+<span class="token comment"># 4. Adicionar ao staging</span>
 <span class="token function">git</span> add README.md
 
-<span class="token comment"># 6. Fazer primeiro commit</span>
+<span class="token comment"># 5. Fazer primeiro commit</span>
 <span class="token function">git</span> commit -m <span class="token string">"Primeiro commit: adiciona README inicial"</span>
 
-<span class="token comment"># 7. Adicionar repositório remoto (crie primeiro no GitHub)</span>
+<span class="token comment"># 6. Adicionar repositório remoto (crie primeiro no GitHub)</span>
 <span class="token function">git</span> remote add origin https://github.com/usuario/meu-projeto.git
 
-<span class="token comment"># 8. Enviar para o GitHub</span>
+<span class="token comment"># 7. Enviar para o GitHub</span>
 <span class="token function">git</span> push -u origin main
 </code></pre>
 <hr>
-<h4 id="git-lfs-large-file-storage"><strong>2. GIT LFS (LARGE FILE STORAGE)</strong></h4>
-<p>2.1 <strong>O que é e quando usar</strong></p>
+<h4 id="reiniciando-um-repositório"><strong>2. REINICIANDO UM REPOSITÓRIO</strong></h4>
+<p><em>(Quando você precisa começar do zero)</em></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Remover completamente o histórico local</span>
+<span class="token function">rm</span> -rf .git  <span class="token comment"># Apaga diretório .git</span>
+
+<span class="token comment"># 2. Inicializar novo repositório</span>
+<span class="token function">git</span> init
+
+<span class="token comment"># 3. Reconfigurar usuário (se necessário)</span>
+<span class="token function">git</span> config user.name <span class="token string">"Novo Nome"</span>
+<span class="token function">git</span> config user.email <span class="token string">"novo@email.com"</span>
+
+<span class="token comment"># 4. Adicionar arquivos essenciais</span>
+<span class="token keyword">echo</span> <span class="token string">"# Reinício do Projeto"</span> <span class="token operator">&gt;</span> README.md
+
+<span class="token comment"># 5. Fazer novo commit inicial</span>
+<span class="token function">git</span> add <span class="token keyword">.</span>
+<span class="token function">git</span> commit -m <span class="token string">"Commit inicial após reinício"</span>
+
+<span class="token comment"># 6. Reconectar ao repositório remoto</span>
+<span class="token function">git</span> remote add origin https://github.com/usuario/meu-projeto.git
+
+<span class="token comment"># 7. Forçar push (substitui histórico remoto)</span>
+<span class="token function">git</span> push -f -u origin main
+
+<span class="token comment"># ATENÇÃO: Isso apaga o histórico anterior do repositório remoto!</span>
+</code></pre>
+<hr>
+<h4 id="git-lfs-large-file-storage"><strong>3. GIT LFS (LARGE FILE STORAGE)</strong></h4>
+<p>3.1 <strong>O que é e quando usar</strong></p>
 <ul>
 <li>Gerencia arquivos grandes (binários, vídeos, datasets)</li>
 <li>Evita problemas com repositórios inchados (&gt;100MB)</li>
 </ul>
-<p>2.2 <strong>Configuração Inicial</strong></p>
+<p>3.2 <strong>Configuração Inicial</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Instalar LFS</span>
 <span class="token function">git</span> lfs <span class="token function">install</span>
 
@@ -69,7 +94,7 @@
 <span class="token comment"># Verificar arquivos rastreados</span>
 <span class="token function">git</span> lfs track
 </code></pre>
-<p>2.3 <strong>Fluxo de Trabalho com LFS</strong></p>
+<p>3.3 <strong>Fluxo de Trabalho com LFS</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Adicionar arquivos grandes</span>
 <span class="token function">git</span> add arquivo.grande
 
@@ -80,48 +105,18 @@
 <span class="token comment"># 3. Clonar repositório com LFS</span>
 <span class="token function">git</span> lfs clone https://github.com/usuario/repo-com-grandes-arquivos.git
 </code></pre>
-<p>2.4 <strong>Boas Práticas com LFS</strong></p>
-<ul>
-<li>Liste explicitamente extensões no <code>.gitattributes</code></li>
-<li>Não use para arquivos de código fonte</li>
-<li>Limite histórico com <code>git lfs prune</code></li>
-</ul>
 <hr>
-<h4 id="comandos-essenciais"><strong>3. COMANDOS ESSENCIAIS</strong></h4>
-
-<table>
-<thead>
-<tr>
-<th>Comando</th>
-<th>Descrição</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>git restore &lt;file&gt;</code></td>
-<td>Desfaz modificações não commitadas</td>
-</tr>
-<tr>
-<td><code>git log --oneline</code></td>
-<td>Histórico compactado</td>
-</tr>
-<tr>
-<td><code>git lfs ls-files</code></td>
-<td>Lista arquivos gerenciados pelo LFS</td>
-</tr>
-<tr>
-<td><code>git stash</code></td>
-<td>Armazena modificações temporárias</td>
-</tr>
-</tbody>
-</table><hr>
 <h4 id="erros-comuns--soluções"><strong>4. ERROS COMUNS &amp; SOLUÇÕES</strong></h4>
 <ul>
 <li>
-<p><strong>Erro:</strong> <code>LF will be replaced by CRLF</code><br>
+<p><strong>Erro:</strong> <code>fatal: not a git repository</code><br>
+<strong>Solução:</strong> Execute <code>git init</code> no diretório correto.</p>
+</li>
+<li>
+<p><strong>Erro:</strong> <code>Updates were rejected</code><br>
 <strong>Solução:</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> config --global core.autocrlf <span class="token boolean">true</span>  <span class="token comment"># Windows</span>
-<span class="token function">git</span> config --global core.autocrlf input <span class="token comment"># Linux/macOS</span>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> pull --rebase origin main
+<span class="token function">git</span> push origin main
 </code></pre>
 </li>
 <li>
@@ -129,6 +124,13 @@
 <strong>Solução:</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> lfs <span class="token function">install</span> --force
 <span class="token function">git</span> reset --hard
+</code></pre>
+</li>
+<li>
+<p><strong>Erro:</strong> <code>LF will be replaced by CRLF</code><br>
+<strong>Solução:</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> config --global core.autocrlf <span class="token boolean">true</span>  <span class="token comment"># Windows</span>
+<span class="token function">git</span> config --global core.autocrlf input <span class="token comment"># Linux/macOS</span>
 </code></pre>
 </li>
 </ul>
@@ -146,10 +148,15 @@
 <li>Sempre inclua <code>.gitignore</code></li>
 <li>Padrões para linguagens: <a href="https://github.com/github/gitignore">github/gitignore</a></li>
 </ul>
+<p>5.3 <strong>Sincronização Segura</strong></p>
+<ul>
+<li><code>git fetch</code> antes de <code>git merge</code></li>
+<li><code>git pull --rebase</code> em vez de <code>git pull</code> para histórico limpo</li>
+</ul>
 <hr>
 <h4 id="workflow-recomendado"><strong>6. WORKFLOW RECOMENDADO</strong></h4>
 <ol>
-<li><code>git pull --rebase</code> antes de trabalhar</li>
+<li><code>git pull --rebase origin main</code></li>
 <li><code>git checkout -b feat/nova-funcionalidade</code></li>
 <li>Commits atômicos com mensagens claras</li>
 <li><code>git push -u origin feat/nova-funcionalidade</code></li>
@@ -157,38 +164,37 @@
 <li>Revisão → Merge → Excluir branch</li>
 </ol>
 <hr>
-<h3 id="para-gerar-o-pdf"><strong>PARA GERAR O PDF:</strong></h3>
-<ol>
-<li>
-<p><strong>Método Markdown</strong>:</p>
+<h4 id="procedimentos-de-emergência"><strong>7. PROCEDIMENTOS DE EMERGÊNCIA</strong></h4>
+<p>7.1 <strong>Desfazer Último Commit Local</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> reset --soft HEAD~1
+</code></pre>
+<p>7.2 <strong>Restaurar Arquivo Apagado</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> checkout HEAD -- caminho/do/arquivo
+</code></pre>
+<p>7.3 <strong>Recuperar Commits Perdidos</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> reflog  <span class="token comment"># Encontre o hash do commit perdido</span>
+<span class="token function">git</span> checkout <span class="token operator">&lt;</span>hash-do-commit<span class="token operator">&gt;</span>
+</code></pre>
+<hr>
+<h3 id="para-gerar-o-pdf"><strong>PARA GERAR O PDF</strong></h3>
 <ul>
-<li>Copie este conteúdo</li>
-<li>Cole em <a href="https://stackedit.io">StackEdit</a></li>
-<li>Exporte como PDF</li>
-</ul>
-</li>
-<li>
-<p><strong>Método Google Docs</strong>:</p>
-<ul>
-<li>Cole em novo documento</li>
-<li>Formate com títulos (Título 1, Título 2)</li>
-<li>Arquivo &gt; Download &gt; PDF</li>
-</ul>
-</li>
-<li>
-<p><strong>Método Terminal</strong>:</p>
-<pre class=" language-bash"><code class="prism  language-bash">pandoc manual.md -o manual.pdf --pdf-engine<span class="token operator">=</span>xelatex
+<li><strong>Método Fácil</strong>:<br>
+<a href="https://stackedit.io">Copie este conteúdo para StackEdit</a> &gt; Exportar como PDF</li>
+<li><strong>Via Terminal</strong>:<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Requer Pandoc instalado</span>
+pandoc manual.md -o manual-github.pdf --pdf-engine<span class="token operator">=</span>xelatex
 </code></pre>
 </li>
-</ol>
+<li><strong>Google Docs</strong>:<br>
+Cole &gt; Formate com estilos de título &gt; Arquivo &gt; Download &gt; PDF</li>
+</ul>
 <hr>
 <p><strong>Links Úteis</strong>:</p>
 <ul>
-<li><a href="https://skills.github.com">Treinamento GitHub</a></li>
+<li><a href="https://github.com/k88hudson/git-flight-rules">Git Flight Rules</a> (guias de emergência)</li>
 <li><a href="https://docs.github.com/pt/repositories/working-with-files/managing-large-files">Git LFS Tutoria</a></li>
-<li><a href="https://gitmoji.dev">Emoji no Commit</a> 😊🚀🔧</li>
+<li><a href="https://ndpsoftware.com/git-cheatsheet.html">Visual Git Cheat Sheet</a></li>
 </ul>
-<p>Precisa de mais detalhes em alguma seção? Posso expandir!</p>
+<p>Este manual agora inclui procedimentos completos para iniciar, reiniciar e gerenciar repositórios com Git/GitHub! 😊</p>
 </div>
 </body>
 
