@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>github passo a passo</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><p>Aqui está o manual atualizado com um exemplo detalhado de primeiro commit e uma seção sobre Git LFS:</p>
+<hr>
+<h3 id="manual-do-git-hub"><strong>MANUAL DO GIT HUB</strong></h3>
+<p><em>(Git e GitHub - Erros, Correções, Primeiros Passos, Boas Práticas e LFS)</em></p>
+<hr>
+<h4 id="primeiros-passos"><strong>1. PRIMEIROS PASSOS</strong></h4>
+<p>1.1 <strong>Instalação</strong></p>
+<ul>
+<li>Windows/macOS/Linux: <a href="https://git-scm.com/downloads">git-scm.com/downloads</a><br>
+1.2 <strong>Configuração Inicial</strong><pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"Seu Nome"</span>
+<span class="token function">git</span> config --global user.email <span class="token string">"seu@email.com"</span>
+<span class="token function">git</span> config --global init.defaultBranch main  <span class="token comment"># Define branch padrão</span>
+</code></pre>
+</li>
+</ul>
+<p>1.3 <strong>Exemplo de Primeiro Commit</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Criar novo diretório e entrar nele</span>
+<span class="token function">mkdir</span> meu-projeto
+<span class="token function">cd</span> meu-projeto
+
+<span class="token comment"># 2. Inicializar repositório</span>
+<span class="token function">git</span> init
+
+<span class="token comment"># 3. Criar arquivo README</span>
+<span class="token keyword">echo</span> <span class="token string">"# Meu Projeto"</span> <span class="token operator">&gt;&gt;</span> README.md
+
+<span class="token comment"># 4. Verificar status</span>
+<span class="token function">git</span> status
+
+<span class="token comment"># 5. Adicionar ao staging</span>
+<span class="token function">git</span> add README.md
+
+<span class="token comment"># 6. Fazer primeiro commit</span>
+<span class="token function">git</span> commit -m <span class="token string">"Primeiro commit: adiciona README inicial"</span>
+
+<span class="token comment"># 7. Adicionar repositório remoto (crie primeiro no GitHub)</span>
+<span class="token function">git</span> remote add origin https://github.com/usuario/meu-projeto.git
+
+<span class="token comment"># 8. Enviar para o GitHub</span>
+<span class="token function">git</span> push -u origin main
+</code></pre>
+<hr>
+<h4 id="git-lfs-large-file-storage"><strong>2. GIT LFS (LARGE FILE STORAGE)</strong></h4>
+<p>2.1 <strong>O que é e quando usar</strong></p>
+<ul>
+<li>Gerencia arquivos grandes (binários, vídeos, datasets)</li>
+<li>Evita problemas com repositórios inchados (&gt;100MB)</li>
+</ul>
+<p>2.2 <strong>Configuração Inicial</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Instalar LFS</span>
+<span class="token function">git</span> lfs <span class="token function">install</span>
+
+<span class="token comment"># Rastrear tipos de arquivos grandes</span>
+<span class="token function">git</span> lfs track <span class="token string">"*.psd"</span>
+<span class="token function">git</span> lfs track <span class="token string">"*.mp4"</span>
+<span class="token function">git</span> lfs track <span class="token string">"*.zip"</span>
+
+<span class="token comment"># Verificar arquivos rastreados</span>
+<span class="token function">git</span> lfs track
+</code></pre>
+<p>2.3 <strong>Fluxo de Trabalho com LFS</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Adicionar arquivos grandes</span>
+<span class="token function">git</span> add arquivo.grande
+
+<span class="token comment"># 2. Commit e push normais</span>
+<span class="token function">git</span> commit -m <span class="token string">"Adiciona assets pesados"</span>
+<span class="token function">git</span> push origin main
+
+<span class="token comment"># 3. Clonar repositório com LFS</span>
+<span class="token function">git</span> lfs clone https://github.com/usuario/repo-com-grandes-arquivos.git
+</code></pre>
+<p>2.4 <strong>Boas Práticas com LFS</strong></p>
+<ul>
+<li>Liste explicitamente extensões no <code>.gitattributes</code></li>
+<li>Não use para arquivos de código fonte</li>
+<li>Limite histórico com <code>git lfs prune</code></li>
+</ul>
+<hr>
+<h4 id="comandos-essenciais"><strong>3. COMANDOS ESSENCIAIS</strong></h4>
+
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git restore &lt;file&gt;</code></td>
+<td>Desfaz modificações não commitadas</td>
+</tr>
+<tr>
+<td><code>git log --oneline</code></td>
+<td>Histórico compactado</td>
+</tr>
+<tr>
+<td><code>git lfs ls-files</code></td>
+<td>Lista arquivos gerenciados pelo LFS</td>
+</tr>
+<tr>
+<td><code>git stash</code></td>
+<td>Armazena modificações temporárias</td>
+</tr>
+</tbody>
+</table><hr>
+<h4 id="erros-comuns--soluções"><strong>4. ERROS COMUNS &amp; SOLUÇÕES</strong></h4>
+<ul>
+<li>
+<p><strong>Erro:</strong> <code>LF will be replaced by CRLF</code><br>
+<strong>Solução:</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> config --global core.autocrlf <span class="token boolean">true</span>  <span class="token comment"># Windows</span>
+<span class="token function">git</span> config --global core.autocrlf input <span class="token comment"># Linux/macOS</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Erro LFS:</strong> <code>batch request: exit status 255</code><br>
+<strong>Solução:</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> lfs <span class="token function">install</span> --force
+<span class="token function">git</span> reset --hard
+</code></pre>
+</li>
+</ul>
+<hr>
+<h4 id="boas-práticas"><strong>5. BOAS PRÁTICAS</strong></h4>
+<p>5.1 <strong>Padrões de Commit</strong></p>
+<ul>
+<li>Use convenções:<br>
+<code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>style:</code>, <code>refactor:</code>, <code>test:</code>, <code>chore:</code></li>
+<li>Exemplo:<br>
+<code>git commit -m "feat: adiciona sistema de autenticação"</code></li>
+</ul>
+<p>5.2 <strong>Git Ignore</strong></p>
+<ul>
+<li>Sempre inclua <code>.gitignore</code></li>
+<li>Padrões para linguagens: <a href="https://github.com/github/gitignore">github/gitignore</a></li>
+</ul>
+<hr>
+<h4 id="workflow-recomendado"><strong>6. WORKFLOW RECOMENDADO</strong></h4>
+<ol>
+<li><code>git pull --rebase</code> antes de trabalhar</li>
+<li><code>git checkout -b feat/nova-funcionalidade</code></li>
+<li>Commits atômicos com mensagens claras</li>
+<li><code>git push -u origin feat/nova-funcionalidade</code></li>
+<li>Abrir Pull Request no GitHub</li>
+<li>Revisão → Merge → Excluir branch</li>
+</ol>
+<hr>
+<h3 id="para-gerar-o-pdf"><strong>PARA GERAR O PDF:</strong></h3>
+<ol>
+<li>
+<p><strong>Método Markdown</strong>:</p>
+<ul>
+<li>Copie este conteúdo</li>
+<li>Cole em <a href="https://stackedit.io">StackEdit</a></li>
+<li>Exporte como PDF</li>
+</ul>
+</li>
+<li>
+<p><strong>Método Google Docs</strong>:</p>
+<ul>
+<li>Cole em novo documento</li>
+<li>Formate com títulos (Título 1, Título 2)</li>
+<li>Arquivo &gt; Download &gt; PDF</li>
+</ul>
+</li>
+<li>
+<p><strong>Método Terminal</strong>:</p>
+<pre class=" language-bash"><code class="prism  language-bash">pandoc manual.md -o manual.pdf --pdf-engine<span class="token operator">=</span>xelatex
+</code></pre>
+</li>
+</ol>
+<hr>
+<p><strong>Links Úteis</strong>:</p>
+<ul>
+<li><a href="https://skills.github.com">Treinamento GitHub</a></li>
+<li><a href="https://docs.github.com/pt/repositories/working-with-files/managing-large-files">Git LFS Tutoria</a></li>
+<li><a href="https://gitmoji.dev">Emoji no Commit</a> 😊🚀🔧</li>
+</ul>
+<p>Precisa de mais detalhes em alguma seção? Posso expandir!</p>
+</div>
+</body>
+
+</html>
