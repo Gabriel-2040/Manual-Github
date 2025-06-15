@@ -9,10 +9,35 @@
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><p>Aqui está o manual completo com a nova seção <strong>“Reiniciando um Repositório”</strong> adicionada após os exemplos de erro:</p>
-<hr>
+  <div class="stackedit__html"><h2 id="manual-do-github">Manual do Github</h2>
 <h3 id="manual-do-git-hub"><strong>MANUAL DO GIT HUB</strong></h3>
 <p><em>(Git e GitHub - Erros, Correções, Primeiros Passos, Boas Práticas e LFS)</em></p>
+<h2 id="exemplo">Exemplo:</h2>
+<ul>
+<li>primeiro subida ao repositório:<br>
+no terminal do vscode usando o CMD, vá para a pasta do projeto e :<br>
+endereço do projeto/ <strong>git init</strong><br>
+endereço do projeto/<strong>git remote add origin <a href="https://github.com/Gabriel-2040/Projeto_eleicoes_ETL.git">https://github.com/Gabriel-2040/Projeto_eleicoes_ETL.git</a></strong></li>
+</ul>
+<h4 id="adicionando-arquivos-para-subir-para-o-github">Adicionando arquivos para subir para o github</h4>
+<h4 id="adicionando-uma-pasta">Adicionando uma pasta</h4>
+<p>endereço do projeto/ <strong>git add _0_Sobre</strong></p>
+<h4 id="adicionando-o-arquivo-gitignore">adicionando o arquivo gitignore</h4>
+<p>endereço do projeto/ <strong>git add .gitignore</strong><br>
+git ignore é uma arquivo que contem os nomes dos arquivos que não vão para o repósiorio do git.(os ignorados, muito grandes ou sensiveis)</p>
+<h4 id="adicionando-o-arquivo-readme.txt">adicionando o arquivo readme.txt</h4>
+<p>endereço do projeto/<strong>git add readme.txt</strong></p>
+<h4 id="preparando-o-commit">Preparando o commit</h4>
+<p>aqui você avisa que vai fazer o primeiro commit e escreve uma mensagem sobre(obrigatório)<br>
+endereço do projeto/<strong>git commit -m "meu primeiro commit"</strong></p>
+<h4 id="escolhendo-a-branch-que-vai-ser-feita-o-commit">Escolhendo a branch que vai ser feita o commit</h4>
+<p>endereço do projeto/<strong>git branch -M main</strong></p>
+<h4 id="fazendo-o-upload-para-o-github-na-branch-main">Fazendo o upload para o github na branch main</h4>
+<p>endereço do projeto/<strong>git push -u origin main</strong></p>
+<h4 id="depois-de-fazer-o-primeiro-commit-e-vai-usar-a-mesma-branch-para-adicionar-outras-pastas-ou-arquivos-só-precisa-desses-3-comandos">Depois de fazer o primeiro commit e vai usar a mesma branch, para adicionar outras pastas ou arquivos só precisa desses 3 comandos:</h4>
+<p>endereço do projeto/<strong>git add _1_modelo_conceitual</strong><br>
+endereço do projeto/<strong>git commit -m "adicionando pasta _1_modelo_conceitual"</strong><br>
+endereço do projeto/<strong>git push origin main</strong></p>
 <hr>
 <h4 id="primeiros-passos"><strong>1. PRIMEIROS PASSOS</strong></h4>
 <p>1.1 <strong>Instalação</strong></p>
@@ -47,11 +72,139 @@
 <span class="token comment"># 7. Enviar para o GitHub</span>
 <span class="token function">git</span> push -u origin main
 </code></pre>
+<h4 id="configurações-essenciais"><strong>2. CONFIGURAÇÕES ESSENCIAIS</strong></h4>
+<p>2.1 <strong><code>git remote</code>: Gerenciando Repositórios Remotos</strong><br>
+O comando <code>git remote</code> permite conectar seu repositório local a servidores remotos (como GitHub):</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Adicionar novo repositório remoto</span>
+<span class="token function">git</span> remote add origin https://github.com/usuario/repo.git
+
+<span class="token comment"># Listar conexões remotas configuradas</span>
+<span class="token function">git</span> remote -v
+
+<span class="token comment"># Exemplo de saída:</span>
+<span class="token comment"># origin  https://github.com/usuario/repo.git (fetch)</span>
+<span class="token comment"># origin  https://github.com/usuario/repo.git (push)</span>
+
+<span class="token comment"># Alterar URL do remote</span>
+<span class="token function">git</span> remote set-url origin https://novaurl.com/repo.git
+
+<span class="token comment"># Renomear remote</span>
+<span class="token function">git</span> remote <span class="token function">rename</span> origin novo-nome
+
+<span class="token comment"># Remover conexão remota</span>
+<span class="token function">git</span> remote remove origin
+</code></pre>
+<p>2.2 <strong><code>.gitignore</code>: Controlando Arquivos Não Rastreados</strong><br>
+Arquivo especial que define quais arquivos/diretórios o Git deve ignorar:</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Criar arquivo .gitignore na raiz do projeto</span>
+<span class="token function">touch</span> .gitignore
+</code></pre>
+<p><strong>Conteúdo típico (.gitignore):</strong></p>
+<pre class=" language-gitignore"><code class="prism  language-gitignore"># Ignorar arquivos de ambiente
+.env
+*.env
+
+# Ignorar diretórios de dependências
+node_modules/
+vendor/
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos compilados
+*.class
+*.exe
+*.dll
+
+# Ignorar logs
+*.log
+logs/
+</code></pre>
+<p><strong>Boas práticas:</strong></p>
+<ul>
+<li>Sempre crie o <code>.gitignore</code> no primeiro commit</li>
+<li>Use templates prontos: <a href="https://github.com/github/gitignore">github/gitignore</a></li>
+<li>Arquivos já rastreados precisam ser removidos:<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> <span class="token function">rm</span> --cached _6_python/api_cep_lat_long_Brazilcep.py
+</code></pre>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> commit -m <span class="token string">"Removendo arquivos do repositório agora ignorados pelo .gitignore"</span>
+</code></pre>
+<pre><code>```bash
+</code></pre>
+git commit -m “Removendo arquivos do repositório agora ignorados pelo .gitignore”<pre><code>```bash
+  git push origin main
+</code></pre>
+</li>
+</ul>
 <hr>
-<h4 id="reiniciando-um-repositório"><strong>2. REINICIANDO UM REPOSITÓRIO</strong></h4>
+<h4 id="ciclo-de-vida-dos-arquivos-no-git"><strong>3. CICLO DE VIDA DOS ARQUIVOS NO GIT</strong></h4>
+<p>3.1 <strong>As 4 Áreas Fundamentais</strong></p>
+<ul>
+<li><strong>Untracked</strong>: Arquivo não rastreado (ex: novo arquivo)</li>
+<li><strong>Unmodified</strong>: Versionado sem modificações</li>
+<li><strong>Modified</strong>: Modificado desde último commit</li>
+<li><strong>Staged</strong>: Preparado para commit (<code>git add</code> aplicado)</li>
+</ul>
+<p>3.2 <strong>Fluxo de Comandos</strong></p>
+<pre class=" language-mermaid"><svg id="mermaid-svg-bc75w4bS2hKvEY1J" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="188.6953125" style="max-width: 750.703125px;" viewBox="0 0 750.703125 188.6953125"><style>#mermaid-svg-bc75w4bS2hKvEY1J{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-svg-bc75w4bS2hKvEY1J .error-icon{fill:#552222;}#mermaid-svg-bc75w4bS2hKvEY1J .error-text{fill:#552222;stroke:#552222;}#mermaid-svg-bc75w4bS2hKvEY1J .edge-thickness-normal{stroke-width:2px;}#mermaid-svg-bc75w4bS2hKvEY1J .edge-thickness-thick{stroke-width:3.5px;}#mermaid-svg-bc75w4bS2hKvEY1J .edge-pattern-solid{stroke-dasharray:0;}#mermaid-svg-bc75w4bS2hKvEY1J .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-svg-bc75w4bS2hKvEY1J .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-svg-bc75w4bS2hKvEY1J .marker{fill:#666;stroke:#666;}#mermaid-svg-bc75w4bS2hKvEY1J .marker.cross{stroke:#666;}#mermaid-svg-bc75w4bS2hKvEY1J svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-svg-bc75w4bS2hKvEY1J .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#000000;}#mermaid-svg-bc75w4bS2hKvEY1J .cluster-label text{fill:#333;}#mermaid-svg-bc75w4bS2hKvEY1J .cluster-label span{color:#333;}#mermaid-svg-bc75w4bS2hKvEY1J .label text,#mermaid-svg-bc75w4bS2hKvEY1J span{fill:#000000;color:#000000;}#mermaid-svg-bc75w4bS2hKvEY1J .node rect,#mermaid-svg-bc75w4bS2hKvEY1J .node circle,#mermaid-svg-bc75w4bS2hKvEY1J .node ellipse,#mermaid-svg-bc75w4bS2hKvEY1J .node polygon,#mermaid-svg-bc75w4bS2hKvEY1J .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-svg-bc75w4bS2hKvEY1J .node .label{text-align:center;}#mermaid-svg-bc75w4bS2hKvEY1J .node.clickable{cursor:pointer;}#mermaid-svg-bc75w4bS2hKvEY1J .arrowheadPath{fill:#333333;}#mermaid-svg-bc75w4bS2hKvEY1J .edgePath .path{stroke:#666;stroke-width:1.5px;}#mermaid-svg-bc75w4bS2hKvEY1J .flowchart-link{stroke:#666;fill:none;}#mermaid-svg-bc75w4bS2hKvEY1J .edgeLabel{background-color:white;text-align:center;}#mermaid-svg-bc75w4bS2hKvEY1J .edgeLabel rect{opacity:0.5;background-color:white;fill:white;}#mermaid-svg-bc75w4bS2hKvEY1J .cluster rect{fill:hsl(210,66.6666666667%,95%);stroke:#26a;stroke-width:1px;}#mermaid-svg-bc75w4bS2hKvEY1J .cluster text{fill:#333;}#mermaid-svg-bc75w4bS2hKvEY1J .cluster span{color:#333;}#mermaid-svg-bc75w4bS2hKvEY1J div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(-160,0%,93.3333333333%);border:1px solid #26a;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-svg-bc75w4bS2hKvEY1J:root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-svg-bc75w4bS2hKvEY1J flowchart{fill:apa;}</style><g><g class="output"><g class="clusters"></g><g class="edgePaths"><g class="edgePath LS-A LE-B" id="L-A-B" style="opacity: 1;"><path class="path" d="M101.71875,120.6171875L151.71875,120.6171875L201.71875,120.6171875" marker-end="url(https://stackedit.io/app#arrowhead19)" style="fill:none"></path><defs><marker id="arrowhead19" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-C LE-D" id="L-C-D" style="opacity: 1;"><path class="path" d="M518.1328125,35.628394524303495L598.640625,21.359375L672.7172865421003,80.578125" marker-end="url(https://stackedit.io/app#arrowhead20)" style="fill:none"></path><defs><marker id="arrowhead20" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-D LE-B" id="L-D-B" style="opacity: 1;"><path class="path" d="M663.8774068083795,127.296875L598.640625,167.3359375L466.84375,167.3359375L333.7109375,167.3359375L269.84375,136.8671875" marker-end="url(https://stackedit.io/app#arrowhead21)" style="fill:none"></path><defs><marker id="arrowhead21" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-B LE-C" id="L-B-C" style="opacity: 1;"><path class="path" d="M265.92121558157487,97.2578125L333.7109375,44.71875L415.5546875,44.71875" marker-end="url(https://stackedit.io/app#arrowhead22)" style="fill:none"></path><defs><marker id="arrowhead22" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-D LE-C" id="L-D-C" style="opacity: 1;"><path class="path" d="M661.171875,89.78576662002723L598.640625,68.078125L518.1328125,53.809105475696505" marker-end="url(https://stackedit.io/app#arrowhead23)" style="fill:none"></path><defs><marker id="arrowhead23" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-B LE-D" id="L-B-D" style="opacity: 1;"><path class="path" d="M269.84375,120.6171875L333.7109375,120.6171875L466.84375,120.6171875L598.640625,120.6171875L661.171875,110.52006007979125" marker-end="url(https://stackedit.io/app#arrowhead24)" style="fill:none"></path><defs><marker id="arrowhead24" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(151.71875,120.6171875)" style="opacity: 1;"><g transform="translate(-25,-13.359375)" class="label"><rect rx="0" ry="0" width="50" height="26.71875"></rect><foreignObject width="50" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-A-B" class="edgeLabel L-LS-A' L-LE-B">git add</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(598.640625,21.359375)" style="opacity: 1;"><g transform="translate(-23.609375,-13.359375)" class="label"><rect rx="0" ry="0" width="47.21875" height="26.71875"></rect><foreignObject width="47.21875" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-C-D" class="edgeLabel L-LS-C' L-LE-D">Modify</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(466.84375,167.3359375)" style="opacity: 1;"><g transform="translate(-25,-13.359375)" class="label"><rect rx="0" ry="0" width="50" height="26.71875"></rect><foreignObject width="50" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-D-B" class="edgeLabel L-LS-D' L-LE-B">git add</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(333.7109375,44.71875)" style="opacity: 1;"><g transform="translate(-38.8671875,-13.359375)" class="label"><rect rx="0" ry="0" width="77.734375" height="26.71875"></rect><foreignObject width="77.734375" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-B-C" class="edgeLabel L-LS-B' L-LE-C">git commit</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(598.640625,68.078125)" style="opacity: 1;"><g transform="translate(-37.53125,-13.359375)" class="label"><rect rx="0" ry="0" width="75.0625" height="26.71875"></rect><foreignObject width="75.0625" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-D-C" class="edgeLabel L-LS-D' L-LE-C">git restore</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(466.84375,120.6171875)" style="opacity: 1;"><g transform="translate(-69.265625,-13.359375)" class="label"><rect rx="0" ry="0" width="138.53125" height="26.71875"></rect><foreignObject width="138.53125" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-B-D" class="edgeLabel L-LS-B' L-LE-D">git restore --staged</span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-A-84" transform="translate(54.859375,120.6171875)" style="opacity: 1;"><rect rx="0" ry="0" x="-46.859375" y="-23.359375" width="93.71875" height="46.71875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-36.859375,-13.359375)"><foreignObject width="73.71875" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Untracked</div></foreignObject></g></g></g><g class="node default" id="flowchart-B-85" transform="translate(235.78125,120.6171875)" style="opacity: 1;"><rect rx="0" ry="0" x="-34.0625" y="-23.359375" width="68.125" height="46.71875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-24.0625,-13.359375)"><foreignObject width="48.125" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Staged</div></foreignObject></g></g></g><g class="node default" id="flowchart-C-86" transform="translate(466.84375,44.71875)" style="opacity: 1;"><rect rx="0" ry="0" x="-51.2890625" y="-23.359375" width="102.578125" height="46.71875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-41.2890625,-13.359375)"><foreignObject width="82.578125" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Unmodified</div></foreignObject></g></g></g><g class="node default" id="flowchart-D-87" transform="translate(701.9375,103.9375)" style="opacity: 1;"><rect rx="0" ry="0" x="-40.765625" y="-23.359375" width="81.53125" height="46.71875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-30.765625,-13.359375)"><foreignObject width="61.53125" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Modified</div></foreignObject></g></g></g></g></g></g></svg></pre>
+<hr>
+<h4 id="operações-diárias"><strong>4. OPERAÇÕES DIÁRIAS</strong></h4>
+<p>4.1 <strong>Verificação de Status</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> status  <span class="token comment"># Mostra estado atual dos arquivos</span>
+</code></pre>
+<p>4.2 <strong>Comparação de Alterações</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> <span class="token function">diff</span>             <span class="token comment"># Modificações não staged</span>
+<span class="token function">git</span> <span class="token function">diff</span> --staged    <span class="token comment"># Modificações staged</span>
+<span class="token function">git</span> <span class="token function">diff</span> HEAD~1      <span class="token comment"># Compara com último commit</span>
+</code></pre>
+<p>4.3 <strong>Correção de Erros</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Desfazer modificações não commitadas</span>
+<span class="token function">git</span> restore arquivo.txt
+
+<span class="token comment"># Remover da área staged</span>
+<span class="token function">git</span> restore --staged arquivo.txt
+
+<span class="token comment"># Reverter último commit (mantém alterações)</span>
+<span class="token function">git</span> reset --soft HEAD~1
+</code></pre>
+<hr>
+<h4 id="sincronização-com-remoto"><strong>5. SINCRONIZAÇÃO COM REMOTO</strong></h4>
+<p>5.1 <strong>Fluxo Completo</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Baixar alterações remotas</span>
+<span class="token function">git</span> fetch origin
+
+<span class="token comment"># Comparar com branch local</span>
+<span class="token function">git</span> <span class="token function">diff</span> origin/main
+
+<span class="token comment"># Incorporar alterações</span>
+<span class="token function">git</span> pull origin main  <span class="token comment"># Equivale a git fetch + git merge</span>
+
+<span class="token comment"># Enviar alterações locais</span>
+<span class="token function">git</span> push -u origin main
+</code></pre>
+<p>5.2 <strong>Resolvendo Conflitos</strong><br>
+Quando ocorrerem mensagens como:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Seu código local
+=======
+Código remoto
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-remoto
+</code></pre>
+<ol>
+<li>Edite o arquivo manualmente</li>
+<li>Remova os marcadores de conflito</li>
+<li>Execute:</li>
+</ol>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> add arquivo_conflitante
+<span class="token function">git</span> commit -m <span class="token string">"Resolve conflito"</span>
+</code></pre>
+<hr>
+<p>Aqui estão as seções completas de <strong>Reiniciando Repositório</strong> e <strong>Git LFS</strong> conforme solicitado:</p>
+<hr>
+<h3 id="reiniciando-um-repositório"><strong>6. REINICIANDO UM REPOSITÓRIO</strong></h3>
 <p><em>(Quando você precisa começar do zero)</em></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Remover completamente o histórico local</span>
-<span class="token function">rm</span> -rf .git  <span class="token comment"># Apaga diretório .git</span>
+<span class="token function">rm</span> -rf .git  <span class="token comment"># Apaga diretório .git (cuidado: operação irreversível!)</span>
 
 <span class="token comment"># 2. Inicializar novo repositório</span>
 <span class="token function">git</span> init
@@ -62,6 +215,7 @@
 
 <span class="token comment"># 4. Adicionar arquivos essenciais</span>
 <span class="token keyword">echo</span> <span class="token string">"# Reinício do Projeto"</span> <span class="token operator">&gt;</span> README.md
+<span class="token keyword">echo</span> <span class="token string">"node_modules/"</span> <span class="token operator">&gt;</span> .gitignore  <span class="token comment"># Criar/atualizar .gitignore</span>
 
 <span class="token comment"># 5. Fazer novo commit inicial</span>
 <span class="token function">git</span> add <span class="token keyword">.</span>
@@ -73,128 +227,103 @@
 <span class="token comment"># 7. Forçar push (substitui histórico remoto)</span>
 <span class="token function">git</span> push -f -u origin main
 
-<span class="token comment"># ATENÇÃO: Isso apaga o histórico anterior do repositório remoto!</span>
+<span class="token comment"># ⚠️ ATENÇÃO: </span>
+<span class="token comment"># - Isso apaga todo o histórico anterior do repositório remoto!</span>
+<span class="token comment"># - Notifique todos os colaboradores antes de executar</span>
+<span class="token comment"># - Ideal apenas para projetos pessoais ou início de novo módulo</span>
 </code></pre>
 <hr>
-<h4 id="git-lfs-large-file-storage"><strong>3. GIT LFS (LARGE FILE STORAGE)</strong></h4>
-<p>3.1 <strong>O que é e quando usar</strong></p>
+<h3 id="git-lfs-large-file-storage"><strong>7. GIT LFS (LARGE FILE STORAGE)</strong></h3>
+<p>7.1 <strong>O que é e quando usar</strong></p>
 <ul>
-<li>Gerencia arquivos grandes (binários, vídeos, datasets)</li>
-<li>Evita problemas com repositórios inchados (&gt;100MB)</li>
+<li>Gerencia arquivos grandes (&gt;100MB): binários, vídeos, datasets, modelos 3D</li>
+<li>Armazena arquivos em servidor separado, mantendo apenas ponteiros no Git</li>
+<li>Evita problemas de performance e limites do GitHub (arquivos &gt;50MB bloqueiam push)</li>
 </ul>
-<p>3.2 <strong>Configuração Inicial</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Instalar LFS</span>
+<p>7.2 <strong>Configuração Inicial</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Instalar LFS (uma vez por máquina)</span>
 <span class="token function">git</span> lfs <span class="token function">install</span>
 
-<span class="token comment"># Rastrear tipos de arquivos grandes</span>
+<span class="token comment"># Especificar tipos de arquivos para rastrear</span>
 <span class="token function">git</span> lfs track <span class="token string">"*.psd"</span>
 <span class="token function">git</span> lfs track <span class="token string">"*.mp4"</span>
 <span class="token function">git</span> lfs track <span class="token string">"*.zip"</span>
+<span class="token function">git</span> lfs track <span class="token string">"data/*.bin"</span>
 
 <span class="token comment"># Verificar arquivos rastreados</span>
 <span class="token function">git</span> lfs track
-</code></pre>
-<p>3.3 <strong>Fluxo de Trabalho com LFS</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Adicionar arquivos grandes</span>
-<span class="token function">git</span> add arquivo.grande
 
-<span class="token comment"># 2. Commit e push normais</span>
-<span class="token function">git</span> commit -m <span class="token string">"Adiciona assets pesados"</span>
+<span class="token comment"># O comando acima gera/atualiza .gitattributes</span>
+<span class="token function">git</span> add .gitattributes
+</code></pre>
+<p>7.3 <strong>Fluxo de Trabalho</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Adicionar arquivos grandes (igual a arquivos normais)</span>
+<span class="token function">git</span> add video.mp4
+
+<span class="token comment"># 2. Commit (cria ponteiro LFS)</span>
+<span class="token function">git</span> commit -m <span class="token string">"Adiciona vídeo tutorial"</span>
+
+<span class="token comment"># 3. Push (envia arquivos para armazenamento LFS)</span>
 <span class="token function">git</span> push origin main
 
-<span class="token comment"># 3. Clonar repositório com LFS</span>
-<span class="token function">git</span> lfs clone https://github.com/usuario/repo-com-grandes-arquivos.git
+<span class="token comment"># 4. Clonar repositório com LFS</span>
+<span class="token function">git</span> lfs clone https://github.com/usuario/projeto-com-videos.git
 </code></pre>
-<hr>
-<h4 id="erros-comuns--soluções"><strong>4. ERROS COMUNS &amp; SOLUÇÕES</strong></h4>
+<p>7.4 <strong>Comandos Avançados</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Verificar arquivos gerenciados pelo LFS</span>
+<span class="token function">git</span> lfs ls-files
+
+<span class="token comment"># Migrar arquivos existentes para LFS</span>
+<span class="token function">git</span> lfs migrate <span class="token function">import</span> --include<span class="token operator">=</span><span class="token string">"*.mp4"</span>
+
+<span class="token comment"># Limpar cache de arquivos antigos</span>
+<span class="token function">git</span> lfs prune
+</code></pre>
+<p>7.5 <strong>Boas Práticas</strong></p>
 <ul>
-<li>
-<p><strong>Erro:</strong> <code>fatal: not a git repository</code><br>
-<strong>Solução:</strong> Execute <code>git init</code> no diretório correto.</p>
-</li>
-<li>
-<p><strong>Erro:</strong> <code>Updates were rejected</code><br>
-<strong>Solução:</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> pull --rebase origin main
-<span class="token function">git</span> push origin main
+<li>Adicione <code>.gitattributes</code> ao versionamento</li>
+<li>Especifique extensões exatas (<code>*.psd</code> em vez de <code>*.*</code>)</li>
+<li>Para datasets grandes, use subdiretórios dedicados:<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> lfs track <span class="token string">"datasets/raw/**"</span>
 </code></pre>
 </li>
-<li>
-<p><strong>Erro LFS:</strong> <code>batch request: exit status 255</code><br>
-<strong>Solução:</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> lfs <span class="token function">install</span> --force
-<span class="token function">git</span> reset --hard
-</code></pre>
-</li>
-<li>
-<p><strong>Erro:</strong> <code>LF will be replaced by CRLF</code><br>
-<strong>Solução:</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> config --global core.autocrlf <span class="token boolean">true</span>  <span class="token comment"># Windows</span>
-<span class="token function">git</span> config --global core.autocrlf input <span class="token comment"># Linux/macOS</span>
-</code></pre>
-</li>
+<li>Atualize o <a href="http://README.md">README.md</a> indicando uso de LFS</li>
 </ul>
 <hr>
-<h4 id="boas-práticas"><strong>5. BOAS PRÁTICAS</strong></h4>
-<p>5.1 <strong>Padrões de Commit</strong></p>
-<ul>
-<li>Use convenções:<br>
-<code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>style:</code>, <code>refactor:</code>, <code>test:</code>, <code>chore:</code></li>
-<li>Exemplo:<br>
-<code>git commit -m "feat: adiciona sistema de autenticação"</code></li>
-</ul>
-<p>5.2 <strong>Git Ignore</strong></p>
-<ul>
-<li>Sempre inclua <code>.gitignore</code></li>
-<li>Padrões para linguagens: <a href="https://github.com/github/gitignore">github/gitignore</a></li>
-</ul>
-<p>5.3 <strong>Sincronização Segura</strong></p>
-<ul>
-<li><code>git fetch</code> antes de <code>git merge</code></li>
-<li><code>git pull --rebase</code> em vez de <code>git pull</code> para histórico limpo</li>
-</ul>
-<hr>
-<h4 id="workflow-recomendado"><strong>6. WORKFLOW RECOMENDADO</strong></h4>
+<h3 id="importante-sobre-reinício--lfs"><strong>Importante sobre Reinício + LFS</strong></h3>
+<p>Se precisar reiniciar um repositório que usa LFS:</p>
 <ol>
-<li><code>git pull --rebase origin main</code></li>
-<li><code>git checkout -b feat/nova-funcionalidade</code></li>
-<li>Commits atômicos com mensagens claras</li>
-<li><code>git push -u origin feat/nova-funcionalidade</code></li>
-<li>Abrir Pull Request no GitHub</li>
-<li>Revisão → Merge → Excluir branch</li>
+<li>Repita os passos da seção 6</li>
+<li>Após o passo 4:</li>
 </ol>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Reconfigurar LFS</span>
+<span class="token function">git</span> lfs <span class="token function">install</span>
+<span class="token function">git</span> lfs track <span class="token string">"*.extensao"</span>  <span class="token comment"># Mesmos padrões anteriores</span>
+<span class="token function">git</span> add .gitattributes
+</code></pre>
+<ol start="3">
+<li>Continue com commit e push forçado</li>
+</ol>
+<p>Este conteúdo mantém a integridade do manual enquanto fornece as informações solicitadas de forma clara e prática. 😊</p>
 <hr>
-<h4 id="procedimentos-de-emergência"><strong>7. PROCEDIMENTOS DE EMERGÊNCIA</strong></h4>
-<p>7.1 <strong>Desfazer Último Commit Local</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> reset --soft HEAD~1
+<h4 id="workflow-profissional"><strong>8. WORKFLOW PROFISSIONAL</strong></h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Atualizar repositório local</span>
+<span class="token function">git</span> checkout main
+<span class="token function">git</span> pull --rebase origin main
+
+<span class="token comment"># 2. Criar nova branch</span>
+<span class="token function">git</span> checkout -b feat/nova-funcionalidade
+
+<span class="token comment"># 3. Desenvolver e commitar</span>
+<span class="token function">git</span> add <span class="token keyword">.</span>
+<span class="token function">git</span> commit -m <span class="token string">"feat: adiciona nova funcionalidade"</span>
+
+<span class="token comment"># 4. Publicar branch</span>
+<span class="token function">git</span> push -u origin feat/nova-funcionalidade
+
+<span class="token comment"># 5. Abrir Pull Request no GitHub</span>
+<span class="token comment"># 6. Após aprovação e merge, limpar branch local</span>
+<span class="token function">git</span> branch -d feat/nova-funcionalidade
 </code></pre>
-<p>7.2 <strong>Restaurar Arquivo Apagado</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> checkout HEAD -- caminho/do/arquivo
-</code></pre>
-<p>7.3 <strong>Recuperar Commits Perdidos</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> reflog  <span class="token comment"># Encontre o hash do commit perdido</span>
-<span class="token function">git</span> checkout <span class="token operator">&lt;</span>hash-do-commit<span class="token operator">&gt;</span>
-</code></pre>
-<hr>
-<h3 id="para-gerar-o-pdf"><strong>PARA GERAR O PDF</strong></h3>
-<ul>
-<li><strong>Método Fácil</strong>:<br>
-<a href="https://stackedit.io">Copie este conteúdo para StackEdit</a> &gt; Exportar como PDF</li>
-<li><strong>Via Terminal</strong>:<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Requer Pandoc instalado</span>
-pandoc manual.md -o manual-github.pdf --pdf-engine<span class="token operator">=</span>xelatex
-</code></pre>
-</li>
-<li><strong>Google Docs</strong>:<br>
-Cole &gt; Formate com estilos de título &gt; Arquivo &gt; Download &gt; PDF</li>
-</ul>
-<hr>
-<p><strong>Links Úteis</strong>:</p>
-<ul>
-<li><a href="https://github.com/k88hudson/git-flight-rules">Git Flight Rules</a> (guias de emergência)</li>
-<li><a href="https://docs.github.com/pt/repositories/working-with-files/managing-large-files">Git LFS Tutoria</a></li>
-<li><a href="https://ndpsoftware.com/git-cheatsheet.html">Visual Git Cheat Sheet</a></li>
-</ul>
-<p>Este manual agora inclui procedimentos completos para iniciar, reiniciar e gerenciar repositórios com Git/GitHub! 😊</p>
 </div>
 </body>
 
