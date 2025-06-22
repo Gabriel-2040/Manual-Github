@@ -10,7 +10,7 @@ endereço do projeto/ **git init**
 endereço do projeto/**git remote add origin https://github.com/Gabriel-2040/Projeto_eleicoes_ETL.git**
 ####   Adicionando arquivos para subir para o github
 ####   Adicionando uma pasta
-endereço do projeto/ **git add _0_Sobre**
+endereço do projeto/ **git add nome_da_pasta**
 #### adicionando o arquivo gitignore
 endereço do projeto/ **git add .gitignore**
 git ignore é uma arquivo que contem os nomes dos arquivos que não vão para o repósiorio do git.(os ignorados, muito grandes ou sensiveis)
