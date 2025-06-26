@@ -14,13 +14,59 @@
 <h1 id="manual-do-github"><strong>MANUAL DO GITHUB</strong></h1>
 <p><em>(Git e GitHub - Guia Prático para Iniciantes)</em></p>
 <h2 id="primeiros-passos"><strong>1. PRIMEIROS PASSOS</strong></h2>
-<h3 id="configuração-inicial"><strong>1.1 Configuração Inicial</strong></h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Configurar usuário (global)</span>
-<span class="token function">git</span> config --global user.name <span class="token string">"Seu Nome"</span>
-<span class="token function">git</span> config --global user.email <span class="token string">"seu@email.com"</span>
-<span class="token function">git</span> config --global init.defaultBranch main
+<h2 id="criar-um-requirements">Criar um Requirements</h2>
+<h3 id="gerar-o-arquivo-requirements.txt-automaticamente"><strong>1. Gerar o arquivo <code>requirements.txt</code> automaticamente</strong></h3>
+<p>Se você já tem um projeto Python com pacotes instalados, execute no terminal:</p>
+<pre class=" language-bash"><code class="prism  language-bash">pip  freeze <span class="token operator">&gt;</span> requirements.txt
 </code></pre>
-<h3 id="primeiro-repositório"><strong>1.2 Primeiro Repositório</strong></h3>
+<h4 id="isso-criará-um-arquivo-requirements.txt-com-todas-as-bibliotecas-instaladas-no-seu-ambiente.">Isso criará um arquivo <code>requirements.txt</code> com todas as bibliotecas instaladas no seu ambiente.</h4>
+<hr>
+<h3 id="criar-manualmente-recomendado-para-projetos-organizados"><strong>1.1. Criar manualmente (recomendado para projetos organizados)</strong></h3>
+<p>Se você quer controlar apenas as dependências principais, crie um arquivo <code>requirements.txt</code> e liste as bibliotecas com versões específicas (opcional):</p>
+<pre class=" language-txt"><code class="prism  language-txt">numpy==1.24.0
+pandas&gt;=1.5.0
+flask
+requests&gt;=2.28.0
+</code></pre>
+<ul>
+<li>
+<p><code>==</code> → Versão exata</p>
+</li>
+<li>
+<p><code>&gt;=</code> → Versão mínima</p>
+</li>
+<li>
+<p>Sem versão → Pega a mais recente</p>
+</li>
+</ul>
+<hr>
+<h3 id="instalar-dependências-a-partir-do-requirements.txt"><strong>1.2 Instalar dependências a partir do <code>requirements.txt</code></strong></h3>
+<p>Para instalar todas as dependências em outro ambiente, use:</p>
+<pre class=" language-bash"><code class="prism  language-bash">pip  <span class="token function">install</span>  -r  requirements.txt
+</code></pre>
+<hr>
+<h3 id="dica-extra-usar-pipreqs-para-gerar-apenas-as-dependências-usadas-no-projeto"><strong>Dica extra: Usar <code>pipreqs</code> para gerar apenas as dependências usadas no projeto</strong></h3>
+<p>Se <code>pip freeze</code> lista muitos pacotes desnecessários, instale o <code>pipreqs</code>:</p>
+<pre class=" language-bash"><code class="prism  language-bash">pip  <span class="token function">install</span>  pipreqs
+</code></pre>
+<p>Depois execute no diretório do projeto:</p>
+<pre class=" language-bash"><code class="prism  language-bash">pipreqs  <span class="token keyword">.</span>  --force
+</code></pre>
+<p>Isso gera um <code>requirements.txt</code> apenas com as bibliotecas usadas no código.</p>
+<h3 id="configuração-inicial"><strong>2.1 Configuração Inicial</strong></h3>
+<p>No comando <code>git config --global user.name</code>, você deve colocar seu nome real (ou como você quer ser identificado nos commits), não seu nome de usuário do GitHub. O email também deve ser o mesmo que você usa no GitHub.</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Configurar usuário (global)</span>
+<span class="token function">git</span>  config  --global  user.name  <span class="token string">"Fulano"</span>
+<span class="token function">git</span>  config  --global  user.email  <span class="token string">"seu-email@exemplo.com"</span>  <span class="token comment"># use o email associado à sua conta GitHub</span>
+<span class="token function">git</span>  config  --global  init.defaultBranch  main
+
+</code></pre>
+<p>Você pode verificar suas configurações atuais com:</p>
+<pre class=" language-bash"><code class="prism  language-bash">
+<span class="token function">git</span>  config  --global  --list
+
+</code></pre>
+<h3 id="primeiro-repositório"><strong>2.2 Primeiro Repositório</strong></h3>
 <p><strong>Passo a Passo:</strong></p>
 <ol>
 <li>Crie um novo repositório no GitHub (com mesmo nome do projeto local)</li>
@@ -35,13 +81,13 @@
 </li>
 </ol>
 <hr>
-<h2 id="controle-de-arquivos"><strong>2. CONTROLE DE ARQUIVOS</strong></h2>
-<h3 id="o-que-subir-para-o-github"><strong>2.1 O que Subir para o GitHub?</strong></h3>
+<h2 id="controle-de-arquivos"><strong>3. CONTROLE DE ARQUIVOS</strong></h2>
+<h3 id="o-que-subir-para-o-github"><strong>3.1 O que Subir para o GitHub?</strong></h3>
 <ul>
 <li>Arquivos de código, documentação e assets essenciais</li>
 <li><strong>Evite:</strong> arquivos grandes (&gt;100MB), sensíveis (.env) ou temporários</li>
 </ul>
-<h3 id="usando-.gitignore"><strong>2.2 Usando .gitignore</strong></h3>
+<h3 id="usando-.gitignore"><strong>3.2 Usando .gitignore</strong></h3>
 <p>Crie um arquivo <code>.gitignore</code> na raiz com:</p>
 <pre class=" language-gitignore"><code class="prism  language-gitignore"># Exemplo:
 node_modules/
@@ -55,8 +101,8 @@ node_modules/
 <span class="token function">git</span> commit -m <span class="token string">"Adiciona arquivo .gitignore"</span>
 </code></pre>
 <hr>
-<h2 id="primeiro-commit"><strong>3. PRIMEIRO COMMIT</strong></h2>
-<h3 id="fluxo-básico"><strong>3.1 Fluxo Básico</strong></h3>
+<h2 id="primeiro-commit"><strong>4. PRIMEIRO COMMIT</strong></h2>
+<h3 id="fluxo-básico"><strong>4.1 Fluxo Básico</strong></h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># 1. Adicionar arquivos específicos:</span>
 <span class="token function">git</span> add README.md .gitignore
 
@@ -66,7 +112,7 @@ node_modules/
 <span class="token comment"># 3. Enviar para o GitHub:</span>
 <span class="token function">git</span> push -u origin main
 </code></pre>
-<h3 id="atualizações-posteriores"><strong>3.2 Atualizações Posteriores</strong></h3>
+<h3 id="atualizações-posteriores"><strong>4.2 Atualizações Posteriores</strong></h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Adicionar alterações:</span>
 <span class="token function">git</span> add pasta/arquivo.ext
 
@@ -77,15 +123,15 @@ node_modules/
 <span class="token function">git</span> push origin main
 </code></pre>
 <hr>
-<h2 id="boas-práticas"><strong>4. BOAS PRÁTICAS</strong></h2>
-<h3 id="mensagens-de-commit"><strong>4.1 Mensagens de Commit</strong></h3>
+<h2 id="boas-práticas"><strong>5. BOAS PRÁTICAS</strong></h2>
+<h3 id="mensagens-de-commit"><strong>5.1 Mensagens de Commit</strong></h3>
 <ul>
 <li>Use verbos no imperativo (“Adiciona”, “Corrige”, “Atualiza”)</li>
 <li>Seja específico:<br>
 ❌ “Mudanças”<br>
 ✅ “Corrige cálculo de impostos no módulo financeiro”</li>
 </ul>
-<h3 id="estrutura-de-pastas"><strong>4.2 Estrutura de Pastas</strong></h3>
+<h3 id="estrutura-de-pastas"><strong>5.2 Estrutura de Pastas</strong></h3>
 <p>Sugestão para projetos de dados:</p>
 <pre><code>_projeto/
 ├── _1_dados/
@@ -94,8 +140,8 @@ node_modules/
 └── README.md
 </code></pre>
 <hr>
-<h2 id="git-lfs-para-arquivos-grandes"><strong>5. GIT LFS (PARA ARQUIVOS GRANDES)</strong></h2>
-<h3 id="configuração"><strong>5.1 Configuração</strong></h3>
+<h2 id="git-lfs-para-arquivos-grandes"><strong>6. GIT LFS (PARA ARQUIVOS GRANDES)</strong></h2>
+<h3 id="configuração"><strong>6.1 Configuração</strong></h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Instalar:</span>
 <span class="token function">git</span> lfs <span class="token function">install</span>
 
@@ -106,14 +152,14 @@ node_modules/
 <span class="token comment"># Verificar:</span>
 <span class="token function">git</span> lfs track
 </code></pre>
-<h3 id="uso"><strong>5.2 Uso</strong></h3>
+<h3 id="uso"><strong>6.2 Uso</strong></h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> add arquivo_grande.csv
 <span class="token function">git</span> commit -m <span class="token string">"Adiciona dataset inicial"</span>
 <span class="token function">git</span> push origin main
 </code></pre>
 <hr>
-<h2 id="solução-de-problemas"><strong>6. SOLUÇÃO DE PROBLEMAS</strong></h2>
-<h3 id="desfazendo-ações"><strong>6.1 Desfazendo Ações</strong></h3>
+<h2 id="solução-de-problemas"><strong>7. SOLUÇÃO DE PROBLEMAS</strong></h2>
+<h3 id="desfazendo-ações"><strong>7.1 Desfazendo Ações</strong></h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Modificações não commitadas:</span>
 <span class="token function">git</span> restore arquivo.txt
 
@@ -123,7 +169,7 @@ node_modules/
 <span class="token comment"># Alterar último commit:</span>
 <span class="token function">git</span> commit --amend -m <span class="token string">"Nova mensagem"</span>
 </code></pre>
-<h3 id="reiniciando-repositório"><strong>6.2 Reiniciando Repositório</strong></h3>
+<h3 id="reiniciando-repositório"><strong>7.2 Reiniciando Repositório</strong></h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">rm</span> -rf .git
 <span class="token function">git</span> init
 <span class="token function">git</span> remote add origin URL
@@ -132,8 +178,8 @@ node_modules/
 <span class="token function">git</span> push -f origin main  <span class="token comment"># CUIDADO: apaga histórico remoto!</span>
 </code></pre>
 <hr>
-<h2 id="workflow-avançado"><strong>7. WORKFLOW AVANÇADO</strong></h2>
-<h3 id="trabalhando-com-branches"><strong>7.1 Trabalhando com Branches</strong></h3>
+<h2 id="workflow-avançado"><strong>8. WORKFLOW AVANÇADO</strong></h2>
+<h3 id="trabalhando-com-branches"><strong>8.1 Trabalhando com Branches</strong></h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Criar nova branch:</span>
 <span class="token function">git</span> checkout -b nova-feature
 
@@ -142,33 +188,27 @@ node_modules/
 
 <span class="token comment"># Voltar para main:</span>
 <span class="token function">git</span> checkout main
-
-Aqui está a seção completa sobre **git reset**, organizada de forma didática para iniciantes:
-
----
-
-<span class="token comment">## **8. GIT RESET - CONTROLE DE HISTÓRICO E ARQUIVOS**</span>
-
-<span class="token comment">### **8.1 O que é git reset?**</span>
-Comando para:
-- Desfazer commits
-- Remover arquivos da área de staging
-- Restaurar o projeto para versões anteriores
-
-⚠️ **Cuidado**: Alterações podem ser permanentes. Use com precaução<span class="token operator">!</span>
-
----
-
-<span class="token comment">### **8.2 Tipos de Reset**</span>
-
-<span class="token comment">#### **1. Reset Soft (--soft)**</span>
-- **O que faz**: Remove commits mas mantém alterações em staging
-- **Quando usar**: Para refazer mensagens de commit ou reorganizar commits pequenos
-
-```bash
-<span class="token function">git</span> reset --soft HEAD~1  <span class="token comment"># Remove o último commit, mantendo alterações prontas para novo commit</span>
 </code></pre>
-<h4 id="reset-mixed-padrão"><strong>2. Reset Mixed (padrão)</strong></h4>
+<p>Aqui está a seção completa sobre <strong>git reset</strong>, organizada de forma didática para iniciantes:</p>
+<h3 id="git-reset---controle-de-histórico-e-arquivos"><strong>9. GIT RESET - CONTROLE DE HISTÓRICO E ARQUIVOS</strong></h3>
+<h3 id="o-que-é-git-reset"><strong>9.1 O que é git reset?</strong></h3>
+<p>Comando para:</p>
+<ul>
+<li>Desfazer commits</li>
+<li>Remover arquivos da área de staging</li>
+<li>Restaurar o projeto para versões anteriores</li>
+</ul>
+<p>⚠️ <strong>Cuidado</strong>: Alterações podem ser permanentes. Use com precaução!</p>
+<hr>
+<h3 id="tipos-de-reset"><strong>9.2 Tipos de Reset</strong></h3>
+<h4 id="reset-soft---soft"><strong>9.2.1 Reset Soft (–soft)</strong></h4>
+<ul>
+<li><strong>O que faz</strong>: Remove commits mas mantém alterações em staging</li>
+<li><strong>Quando usar</strong>: Para refazer mensagens de commit ou reorganizar commits pequenos</li>
+</ul>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> reset --soft HEAD~1  <span class="token comment"># Remove o último commit, mantendo alterações prontas para novo commit</span>
+</code></pre>
+<h4 id="reset-mixed-padrão"><strong>9.2.2 Reset Mixed (padrão)</strong></h4>
 <ul>
 <li><strong>O que faz</strong>: Remove commits e tira arquivos do staging (mas mantém alterações no diretório)</li>
 <li><strong>Quando usar</strong>: Quando você adicionou arquivos por engano ao staging</li>
@@ -176,7 +216,7 @@ Comando para:
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> reset HEAD~1          <span class="token comment"># Equivalente a git reset --mixed HEAD~1</span>
 <span class="token function">git</span> reset arquivo.txt     <span class="token comment"># Remove arquivo específico do staging</span>
 </code></pre>
-<h4 id="reset-hard---hard"><strong>3. Reset Hard (–hard)</strong></h4>
+<h4 id="reset-hard---hard"><strong>9.2.3 Reset Hard (–hard)</strong></h4>
 <ul>
 <li><strong>O que faz</strong>: Apaga completamente commits e alterações não commitadas</li>
 <li><strong>Quando usar</strong>: Para descartar totalmente alterações indesejadas</li>
@@ -185,7 +225,7 @@ Comando para:
 <span class="token function">git</span> reset --hard abc123   <span class="token comment"># Volta para o commit específico (hash abc123)</span>
 </code></pre>
 <hr>
-<h3 id="cenários-práticos"><strong>8.3 Cenários Práticos</strong></h3>
+<h3 id="cenários-práticos"><strong>9.3 Cenários Práticos</strong></h3>
 <h4 id="cenário-1-desfazer-commit-não-enviado-ao-github"><strong>Cenário 1: Desfazer commit não enviado ao GitHub</strong></h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> reset --soft HEAD~1   <span class="token comment"># Remove commit mas mantém alterações</span>
 <span class="token comment"># Edite os arquivos se necessário</span>
@@ -199,7 +239,7 @@ Comando para:
 <span class="token function">git</span> reset arquivo2.txt            <span class="token comment"># Remove apenas arquivo2.txt do staging</span>
 </code></pre>
 <hr>
-<h3 id="reset-vs-revert"><strong>8.4 Reset vs Revert</strong></h3>
+<h3 id="reset-vs-revert"><strong>9.4 Reset vs Revert</strong></h3>
 
 <table>
 <thead>
@@ -222,7 +262,7 @@ Comando para:
 </tr>
 </tbody>
 </table><hr>
-<h3 id="boas-práticas-1"><strong>8.5 Boas Práticas</strong></h3>
+<h3 id="boas-práticas-1"><strong>9.5 Boas Práticas</strong></h3>
 <ol>
 <li><strong>Nunca faça reset em commits já enviados ao repositório remoto</strong> (use <code>git revert</code>)</li>
 <li><strong>Sempre verifique o status antes</strong>:<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> status
@@ -236,7 +276,7 @@ Comando para:
 </li>
 </ol>
 <hr>
-<h3 id="recuperando-commits-apagados"><strong>8.6 Recuperando Commits Apagados</strong></h3>
+<h3 id="recuperando-commits-apagados"><strong>9.6 Recuperando Commits Apagados</strong></h3>
 <p>Se você fez reset por engano:</p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> reflog  <span class="token comment"># Mostra todo o histórico de ações</span>
 <span class="token function">git</span> reset --hard abc123  <span class="token comment"># Volta para o commit desejado (use hash do reflog)</span>
@@ -251,92 +291,166 @@ Fluxo de alteração com diferentes tipos de reset:</p>
     └── hard: remove tudo (volta exatamente para A)
 </code></pre>
 <p>Esta seção cobre desde o básico até situações complexas de recuperação, sempre alertando sobre os riscos de cada operação.</p>
-<pre><code>## **OBSERVAÇÕES IMPORTANTES**
-
-### ⚠️  **Armadilhas Comuns**
-
-1.  **Nunca trabalhe diretamente na branch  `main`**
-    
-    -   Sempre crie branches para novas funcionalidades (`git checkout -b nova-branch`)
-        
-2.  **Cuidado com  `git push -f`**
-    
-    -   Sobrescreve o histórico remoto - pode causar perda de trabalho de outros colaboradores
-        
-3.  **Problemas com arquivos grandes**
-    
-    -   GitHub bloqueia pushes acima de 100MB - use Git LFS ou adicione ao  `.gitignore`
-        
-
-### 💡  **Dicas Valiosas**
-
-1.  **Sempre comece com  `git status`**
-    
-    -   Verifique o estado atual antes de qualquer operação
-        
-2.  **Commite frequentemente**
-    
-    -   Pequenos commits com mensagens claras &gt; um commit gigante
-        
-3.  **Mantenha seu  `.gitignore`  atualizado**
-    
-    -   Adicione padrões de arquivos temporários/desnecessários desde o início
-        
-4.  **Convenções de nomenclatura**
-    
-    -   Branches:  `feat/nome-da-feature`,  `fix/correcao-x`
-        
-    -   Tags:  `v1.0.0`,  `release-2023-10`
-        
-
-### 🆘  **Quando Algo Der Errado**
-
-1.  **Use  `git log --oneline`**
-    
-    -   Visualize o histórico de commits de forma compacta
-        
-2.  **Para desfazer quase tudo**
-    
-    bash
-    
-    Copy
-    
-    Download
-    
-    git reflog  # Mostra todas as ações realizadas
-    git reset --hard [hash-do-commit]  # Volta para estado anterior
-    
-3.  **Conflitos de merge?**
-    
-    -   Mantenha a calma! Edite os arquivos conflitantes manualmente, removendo os marcadores  `&lt;&lt;&lt;&lt;&lt;&lt;&lt;`,  `=======`  e  `&gt;&gt;&gt;&gt;&gt;&gt;&gt;`
-        
-
-### 📚  **Próximos Passos**
-
-1.  Explore recursos avançados:
-    
-    -   `git stash`  (para salvar trabalho não finalizado)
-        
-    -   `git rebase`  (para limpar histórico de commits)
-        
-    -   GitHub Actions (automatização de workflows)
-        
-2.  Pratique com:
-    
-    -   [GitHub Learning Lab](https://lab.github.com/)
-        
-    -   [Oh My Git!](https://ohmygit.org/)  (jogo educativo)
-        
-3.  Documente seu projeto:
-    
-    -   Crie um README.md completo
-        
-    -   Adicione licença (MIT, GPL, etc.)
-        
-
-Lembre-se: Todo desenvolvedor já cometeu erros com Git - o importante é aprender com eles! 😊
-
+<h2 id="observações-importantes"><strong>OBSERVAÇÕES IMPORTANTES</strong></h2>
+<h3 id="⚠️--armadilhas-comuns">⚠️  <strong>Armadilhas Comuns</strong></h3>
+<ol>
+<li>
+<p><strong>Nunca trabalhe diretamente na branch  <code>main</code></strong></p>
+<ul>
+<li>Sempre crie branches para novas funcionalidades (<code>git checkout -b nova-branch</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Cuidado com  <code>git push -f</code></strong></p>
+<ul>
+<li>Sobrescreve o histórico remoto - pode causar perda de trabalho de outros colaboradores</li>
+</ul>
+</li>
+<li>
+<p><strong>Problemas com arquivos grandes</strong></p>
+<ul>
+<li>GitHub bloqueia pushes acima de 100MB - use Git LFS ou adicione ao  <code>.gitignore</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="💡--dicas-valiosas">💡  <strong>Dicas Valiosas</strong></h3>
+<ol>
+<li>
+<p><strong>Sempre comece com  <code>git status</code></strong></p>
+<ul>
+<li>Verifique o estado atual antes de qualquer operação</li>
+</ul>
+</li>
+<li>
+<p><strong>Commite frequentemente</strong></p>
+<ul>
+<li>Pequenos commits com mensagens claras &gt; um commit gigante</li>
+</ul>
+</li>
+<li>
+<p><strong>Mantenha seu  <code>.gitignore</code>  atualizado</strong></p>
+<ul>
+<li>Adicione padrões de arquivos temporários/desnecessários desde o início</li>
+</ul>
+</li>
+<li>
+<p><strong>Convenções de nomenclatura</strong></p>
+<ul>
+<li>
+<p>Branches:  <code>feat/nome-da-feature</code>,  <code>fix/correcao-x</code></p>
+</li>
+<li>
+<p>Tags:  <code>v1.0.0</code>,  <code>release-2023-10</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="🆘--quando-algo-der-errado">🆘  <strong>Quando Algo Der Errado</strong></h3>
+<ol>
+<li>
+<p><strong>Use  <code>git log --oneline</code></strong></p>
+<ul>
+<li>Visualize o histórico de commits de forma compacta</li>
+</ul>
+</li>
+<li>
+<p><strong>Para desfazer quase tudo</strong></p>
+<p>bash</p>
+<p>Copy</p>
+<p>Download</p>
+<p>git reflog  # Mostra todas as ações realizadas<br>
+git reset --hard [hash-do-commit]  # Volta para estado anterior</p>
+</li>
+<li>
+<p><strong>Conflitos de merge?</strong></p>
+<ul>
+<li>Mantenha a calma! Edite os arquivos conflitantes manualmente, removendo os marcadores  <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>,  <code>=======</code>  e  <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="📚--próximos-passos">📚  <strong>Próximos Passos</strong></h3>
+<ol>
+<li>
+<p>Explore recursos avançados:</p>
+<ul>
+<li>
+<p><code>git stash</code>  (para salvar trabalho não finalizado)</p>
+</li>
+<li>
+<p><code>git rebase</code>  (para limpar histórico de commits)</p>
+</li>
+<li>
+<p>GitHub Actions (automatização de workflows)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Pratique com:</p>
+<ul>
+<li>
+<p><a href="https://lab.github.com/">GitHub Learning Lab</a></p>
+</li>
+<li>
+<p><a href="https://ohmygit.org/">Oh My Git!</a>  (jogo educativo)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Documente seu projeto:</p>
+<ul>
+<li>
+<p>Crie um <a href="http://README.md">README.md</a> completo</p>
+</li>
+<li>
+<p>Adicione licença (MIT, GPL, etc.)</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Lembre-se: Todo desenvolvedor já cometeu erros com Git - o importante é aprender com eles! 😊</p>
+<h2 id="observações-importantes-parte-2"><strong>OBSERVAÇÕES IMPORTANTES PARTE 2</strong></h2>
+<h3 id="modificar-o-nome-da-branch-principal-do-seu-repositório-git-de-master-para-main-siga-estes-passos">Modificar o nome da branch principal do seu repositório Git de <code>master</code> para <code>main</code>, siga estes passos:</h3>
+<h3 id="primeiro-crie-a-nova-branch-main">1. Primeiro, crie a nova branch <code>main</code>:</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span>  branch  -m  master  main
 </code></pre>
+<h3 id="faça-push-da-nova-branch-para-o-repositório-remoto-github">2. Faça push da nova branch para o repositório remoto (GitHub):</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span>  push  -u  origin  main
+</code></pre>
+<h3 id="atualize-a-branch-padrão-no-github">3. Atualize a branch padrão no GitHub:</h3>
+<ul>
+<li>
+<p>Vá até seu repositório no GitHub</p>
+</li>
+<li>
+<p>Clique em “Settings” (Configurações)</p>
+</li>
+<li>
+<p>No menu à esquerda, clique em “Branches”</p>
+</li>
+<li>
+<p>Na seção “Default branch”, clique no ícone de edição (✏️) e selecione <code>main</code></p>
+</li>
+<li>
+<p>Clique em “Update” (Atualizar)</p>
+</li>
+</ul>
+<h3 id="finalmente-delete-a-branch-master-remota-opcional">4. Finalmente, delete a branch <code>master</code> remota (opcional):</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span>  push  origin  --delete  master
+</code></pre>
+<h3 id="atualize-seu-repositório-local">5. Atualize seu repositório local:</h3>
+<pre><code>``` bash
+git  fetch  origin
+git  remote  prune  origin
+</code></pre>
+<p>Isso fará com que:</p>
+<ul>
+<li>
+<p>Todos os novos repositórios que você criar usarão <code>main</code> como branch padrão (devido à configuração <code>init.defaultBranch main</code>)</p>
+</li>
+<li>
+<p>Seus repositórios existentes serão migrados de <code>master</code> para <code>main</code></p>
+</li>
+</ul>
 </div>
 </body>
 
